@@ -1,0 +1,153 @@
+HTML/CSS設計について、プログラミング学習サイトなどでは教えられていない暗黙知の部分をこのドキュメントにまとめます。
+
+
+
+Ph.0 Before you start your work; there are some fundamental `codes` that you have to follow
+------------------------
+
+
+CSSにおいて特有の設計手法はありますが、あらゆるプログラムに共通するベストプラクティスもベースに必要です。
+
+- [プログラマが知るべき97のこと](https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/), [en](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/
+)
+- リーダブルコード
+
+
+Ph.1 Paper Coding; define the name of components 
+------------------------
+
+Paper coding means that you print out the design file (PSD/Sketch etc.) & define component names.
+This activity helps to organize/abstruct component.
+When you have enough experience of coding CSS, you can skip this step. Skilled markup developer can do it on his/her mind!
+
+ペーパーコーディングは、デザインファイルを神に印刷して、コンポーネント名を定義する取り組みです。
+これをやると、コンポーネントを構成・抽象化するのに役立ちます。
+もしあなたが十分な経験をもっているのであればこのstepは飛ばしてください。熟練のマークアップエンジニアは頭の中でこれができるはず！
+
+On this step, keep in mind to do abstruction that has good reusability & coheciveness & loose coupling.
+You have to name them so that you one year later can easily get the behavior & meaning of component.
+
+再利用性・凝集性・疎結合性をもった適切な抽象化を行うこと。
+再利用性があり、自分が1年後にみてもわかりやすい名前をつける。
+
+Refer: 
+
+- [ドメインの言葉をつかったコード](https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E8%A8%80%E8%91%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89/
+), [en](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_11/)
+- [名前重要](https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/), (no english version avaliable)
+- [リーダブルコード](https://qiita.com/Kenya/items/faec4cc374edd5ffbba6), [en PDF](http://the-eye.eu/public/Books/IT%20Various/the_art_of_readable_code.pdf)
+- [Separation of Container and Content](https://www.keycdn.com/blog/oocss#the-second-rule-of-oocss-separation-of-container-and-content)
+
+### Procedure
+
+- Decide what CSS naming rule you use. 4DSD team recommend to use `Atomic Design` or `SMACSS`.
+- Decide which rule you adopt & which part of rule you change. (On `Atomic Design`, codes tend to be mess when you use `page` level CSS. Concerning `templates` layer, sometimes you can make project without writing codes for them. Concerning JS related classes, we tend to allow to use them e.g. `is-active`, `js-xxxx`)
+- Name entire level layout component (e.g. `o-header`, `o-footer`, `o-sidebar`, `o-modal` etc.)
+- Name parts level layout component (e.g. `o-grid`, `o-section`, etc.). If you failed to do abstruction on them, tragedy such as setting same padding/margin for many components may occur.
+- Concerning content level components, it is recommend to define from atom level. If it is defined from the bigger component, some bad effects often occurs. e.g. molecules contains the definition of button/icon.img, atoms has margin that should be controlled by molecules/organisms.
+- After defining components, please reconsider the integrity & consistency of components. Some components can be merged/splitted.
+
+- つかうネーミングルールを決める(atomic designかSMACSSが2018年時点ではおすすめ。SD事業部ではatomic designを主につかう)
+- ネーミングルールのうち、採用するもの、変更するものを決める(atomic designにおいては、pagesをつくると失敗する。templatesも、場合によっては使わない方がよい。また、CSSではなくJSにかかわるクラスであれば、`is-active`や`js-xxxxx`などは許容してもよい)
+- 全体レイアウトコンポーネントについて、名前をつけていく(`o-header`, `o-footer`, `o-sidebar`, `o-modal` etc.)
+- 部分レイアウトコンポーネントについて、名前をつけていく(`o-grid`, `o-section`, etc.)(このレベルの抽象化でミスると、moleculesなどにおなじpadding/marginをつけて回るような事態になる)
+- コンテンツ部分のコンポーネントについて、__atom__から名前をつけていく(大きいものからつけていくと、moleculesにbuttonやiconやimgを含んでしまう弊害がある)
+- 名前をつけたあとで、全体の整合性を見直す(統合、分割できるコンポーネントが出てきているはず)
+
+### Checklist
+
+- Is components have enough reusability & coheciveness & loose coupling?
+- Is components follows the rule you choose?
+- Is components have named using standard term? There are some terms that are often used on HTML/CSS https://qiita.com/Kenya/items/1e01662ca6acdb334eec
+- Can you clarify in what part you were troubled / have uncertainness?
+
+- コンポーネントの再利用が考慮された名前になっているか
+- ネーミングルール(atomic design)のルールにそう名前になっているか
+- 一般的でない言葉をつかっていないか 
+- どう行った部分に迷ったか言語化できているか
+
+#### supplements; way of element / nesting rules
+
+##### pattern 1-1;  
+
+```scss
+.o-mainVisual {
+  &__slidegallery {
+    height: 200px;
+  }
+}
+```
+
+```pug
+// pug パターン1
+div.o-mainVisual
+  div.o-mainVisual__slideGallery
+    div.m-slidegallery
+```
+
+##### pattern 1-2
+
+scss => same as pattern 1-1
+
+```pug
+// pug パターン2 (recommended)
+div.o-mainVisual
+  div.o-mainVisual__slideGallery.m-slidegallery
+```
+
+
+##### pattern 2
+
+
+
+```scss
+// scss
+.o-mainVisual {
+  .m-slidegallery {
+    height: 200px;
+  }
+}
+```
+
+```pug
+// pug (recommended)
+div.o-mainVisual
+  div.m-slidegallery
+```
+
+
+Ph.2 Developing: implement components & pages
+------------------------
+
+1. 負債とならないような書き方
+ad hocなCSSではなく、あらゆるパターンをできるだけ吸収できるCSSにする、コピペをさける、コンポーネント間の依存関係の境界面を明確化して高凝集と疎結合を目指す(atomic design, OOP)
+see「分別のある行動」：https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E8%A8%80%E8%91%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89/
+see「DRY原則」：
+https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/DRY%E5%8E%9F%E5%89%87/
+* ECSSといった思想もありますが、独自なレイアウトのページが大量にあるわけではないときにはあまりむきません。
+see「単一責任原則」：
+https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/
+see「育ちのよいコード」：
+https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E8%82%B2%E3%81%A1%E3%81%AE%E3%82%88%E3%81%84%E3%82%B3%E3%83%BC%E3%83%89/
+
+### Checklist
+
+- linterは入れているか(stylelint, eslint等とエディッタの連携)
+- 暗黙のルール(マージンをつける方向、幅指定などをどのレベルのコンポーネントにつけるか、nestのレベルなど)は統一・共有されているか。lint化できるものはlintに反映されているか
+- サイト全体の共通ルール(`font-family`, `line-height`, `background`, bodyやhtmlの幅高さスクロール etc.)は共通化されているか
+- emmetをつかっているか(HTML. CSSともに使うことを強く推奨する)
+- browser-syncやwebpack-dev-serverをつかってブラウザ再読み込みを自動化しているか
+- イテレーションを素早く繰り返しているか(編集と確認のサイクルを素早く。つねに両方の画面をだしておくウインドウのレイアウトを推奨)
+- 細かい修正をいちいちエディッタにいれて確認するのではなく、ブラウザのdevtoolで行っているか(devtoolでの変更結果をまとめてeditorに反映した方が速い)
+- devtoolでの修正において、機能を使いこなしているか
+    - Elements > Styles
+        - cmd, opt, shiftをおしながら矢印上下を押すと、CSSの調整範囲が変わる
+        - `:hov`, `.cls`から、状態変化をおこしたりクラスを追加したりできる
+        - filterをつかうと定義箇所を絞り込める
+        - SourceMapが設定されて入れば、コンパイル前の箇所が特定できる
+- CSS抽出は素早くおこなっているか(Photoshop, Zeplin, AvoCodeのCSSコピー機能の利用を強く推奨する。SDではZeplinを採用している)
+- `flex`, `CSS grid`を過剰に使っていないか(`display: block`で表示できる箇所を`flex-direction: column`をつかっていたり。IEでの表示崩れの原因となる)。
+- IE, Firefox, Safari, Mobile Safari, Android Chromeのデバッガ利用方法を理解しているか
+- 画像の書き出し方を理解しているか
+- 使わなくなったコードを大量にコメントアウトしたりしていないか。試行錯誤の間はコメントがたくさんあってもいいですが、ある程度実装が完了して、gitのコミット履歴から辿れる状態であれば、消去してください。
+- 動かない or バグがあるコードが、Pull Request送付時や、masterへのpush時に入っていないか
