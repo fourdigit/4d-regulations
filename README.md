@@ -15,6 +15,7 @@
 **1. Features**
 
 - Allow ForkingはDisabled
+
 ![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977396774_+2019-10-25+12.18.56.png)
 
 
@@ -22,6 +23,7 @@
 
 - Allow squash merging のみにチェックを入れておくとmaster / developのコミットが綺麗になるため推奨
 - Automatically delete head branches にチェックを入れておくとPRをマージ後、マージされたブランチを自動で削除してくれるため便利
+
 ![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977427645_+2019-10-25+12.19.04.png)
 
 
