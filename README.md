@@ -12,25 +12,24 @@
 ### オプション設定 (Options)
 
 
-1. Features
-![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977396774_+2019-10-25+12.18.56.png)
+**1. Features**
 
 - Allow ForkingはDisabled
+![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977396774_+2019-10-25+12.18.56.png)
 
 
-
-2. Merge button
-![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977427645_+2019-10-25+12.19.04.png)
+**2. Merge button**
 
 - Allow squash merging のみにチェックを入れておくとmaster / developのコミットが綺麗になるため推奨
 - Automatically delete head branches にチェックを入れておくとPRをマージ後、マージされたブランチを自動で削除してくれるため便利
+![](https://paper-attachments.dropbox.com/s_DEFD74B03744E445DF4463E84A3E0750A54F20348801396CDC651088D5C76423_1571977427645_+2019-10-25+12.19.04.png)
 
 
 
 ### アクセスコントロール  (Collaborators & teams)
 **Public Repositoryの場合**
 
-- 設定不要 (デフォルトでOK)
+設定不要 (デフォルトでOK)
 
 **Private Repositoryの場合**
 
