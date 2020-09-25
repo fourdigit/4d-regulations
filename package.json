@@ -1,0 +1,14 @@
+{
+  "name": "4d-regulations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fourdigit/4d-regulations.git",
+  "author": "Shunsuke Sakurai <shunsuke.sakurai@4digit.jp>",
+  "license": "MIT",
+  "devDependencies": {
+    "textlint": "^11.7.6",
+    "textlint-rule-preset-ja-spacing": "^2.0.2",
+    "textlint-rule-preset-ja-technical-writing": "^4.0.1",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0"
+  }
+}

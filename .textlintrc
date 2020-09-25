@@ -1,0 +1,22 @@
+{
+  "filters": {},
+  "rules": {
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        "space": "never"
+      }
+    },
+    "preset-ja-technical-writing": true,
+    "spellcheck-tech-word": true,
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        max: 200
+      },
+      "max-ten": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-mixed-period": false,
+      "max-comma": false,
+      "no-doubled-joshi": false,
+    },
+  }
+}
